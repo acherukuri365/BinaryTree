@@ -33,15 +33,19 @@ public class BinaryTree<E extends Comparable<E>> {
 		TreeNode<E> node = new TreeNode<E>(root.getValue(), root.getLeft(), root.getRight());
 		//~ System.out.println("happy2");
 		while(node.getLeft() != null || node.getRight() != null) {
-			if(value.compareTo(node.getValue()) < 0)
+			if(value.compareTo(node.getValue()) < 0) {
 				node = node.getLeft();
-			else
+				System.out.println("left");
+			}
+			else {
 				node = node.getRight();
+				System.out.println("right");
+			}
 		}
 		
 		if(value.compareTo(node.getValue()) < 0) {
 			node.setLeft(new TreeNode(value));
-			System.out.println("less than");
+			//~ System.out.println("less than");
 		}
 		else
 			node.setRight(new TreeNode(value));
@@ -58,6 +62,8 @@ public class BinaryTree<E extends Comparable<E>> {
 		if(node == null)
 			return;
 		
+		System.out.println("\n" + node.getLeft().getValue() + "\n\n");
+		
 		printInorder(node.getLeft());
 		
 		System.out.println(node.getValue() + " ");
@@ -69,26 +75,34 @@ public class BinaryTree<E extends Comparable<E>> {
 	 *	Print Binary Tree Preorder
 	 */
 	public void printPreorder() {
+		printPreorder(root);
+	}
+	
+	public void printPreorder(TreeNode<E> node) {
 		if(node == null)
 			return;
 		
 		System.out.println(node.getValue() + " ");
 		
-		printInorder(node.getLeft());
+		printPreorder(node.getLeft());
 		
-		printInorder(node.getRight());
+		printPreorder(node.getRight());
 	}
 	
 	/**
 	 *	Print Binary Tree Postorder
 	 */
 	public void printPostorder() {
+		printPostorder(root);
+	}
+	
+	public void printPostorder(TreeNode<E> node) {
 		if(node == null)
 			return;
 		
-		printInorder(node.getLeft());
+		printPostorder(node.getLeft());
 		
-		printInorder(node.getRight());
+		printPostorder(node.getRight());
 		
 		System.out.println(node.getValue() + " ");
 	}
