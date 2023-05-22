@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 /**
  *	Binary Tree of Comparable values.
  *	The tree only has unique values. It does not add duplicate values.
@@ -9,12 +10,15 @@ public class BinaryTree<E extends Comparable<E>> {
 
 	private TreeNode<E> root;		// the root of the tree
 	
+	private ArrayList<E> list;		// list of values for balanced tree
+	
 	private final int PRINT_SPACES = 3;	// print spaces between tree levels
 										// used by printTree()
 	
 	/**	constructor for BinaryTree */
 	public BinaryTree() {
 		root = null;
+		list = new ArrayList<E>();
 	}
 	
 	/**	Field accessors and modifiers */
@@ -30,25 +34,50 @@ public class BinaryTree<E extends Comparable<E>> {
 			root = new TreeNode<E>(value);
 			return;
 		}
-		TreeNode<E> node = new TreeNode<E>(root.getValue(), root.getLeft(), root.getRight());
+		//~ TreeNode<E> node = new TreeNode<E>(root.getValue(), root.getLeft(), root.getRight());
 		//~ System.out.println("happy2");
-		while(node.getLeft() != null || node.getRight() != null) {
+		//~ while(node.getLeft() != null || node.getRight() != null) {
+			//~ if(value.compareTo(node.getValue()) < 0) {
+				//~ node = node.getLeft();
+				//~ System.out.println("left");
+			//~ }
+			//~ else {
+				//~ node = node.getRight();
+				//~ System.out.println("right");
+			//~ }
+		//~ }
+		
+		//~ if(value.compareTo(node.getValue()) < 0) {
+			//~ node.setLeft(new TreeNode(value));
+			//~ System.out.println("less than");
+		//~ }
+		//~ else
+			//~ node.setRight(new TreeNode(value));
+			
+		TreeNode<E> node = root;
+		TreeNode<E> child = null;
+		while(true) {
 			if(value.compareTo(node.getValue()) < 0) {
-				node = node.getLeft();
-				System.out.println("left");
+				child = node.getLeft();
+				if(child == null) {
+					TreeNode<E> newNode = new TreeNode<E>(value);
+					node.setLeft(newNode);
+					return;
+				}
+				else
+					node = node.getLeft();
 			}
 			else {
-				node = node.getRight();
-				System.out.println("right");
+				child = node.getRight();
+				if(child == null) {
+					TreeNode<E> newNode = new TreeNode<E>(value);
+					node.setRight(newNode);
+					return;
+				}
+				else
+					node = node.getRight();
 			}
 		}
-		
-		if(value.compareTo(node.getValue()) < 0) {
-			node.setLeft(new TreeNode(value));
-			//~ System.out.println("less than");
-		}
-		else
-			node.setRight(new TreeNode(value));
 	}
 	
 	/**
@@ -62,11 +91,12 @@ public class BinaryTree<E extends Comparable<E>> {
 		if(node == null)
 			return;
 		
-		System.out.println("\n" + node.getLeft().getValue() + "\n\n");
+		//~ System.out.println("\n" + node.getLeft().getValue() + "\n\n");
 		
 		printInorder(node.getLeft());
 		
-		System.out.println(node.getValue() + " ");
+		System.out.print(node.getValue() + " ");
+		list.add(node.getValue());
 		
 		printInorder(node.getRight());
 	}
@@ -82,7 +112,7 @@ public class BinaryTree<E extends Comparable<E>> {
 		if(node == null)
 			return;
 		
-		System.out.println(node.getValue() + " ");
+		System.out.print(node.getValue() + " ");
 		
 		printPreorder(node.getLeft());
 		
@@ -104,7 +134,7 @@ public class BinaryTree<E extends Comparable<E>> {
 		
 		printPostorder(node.getRight());
 		
-		System.out.println(node.getValue() + " ");
+		System.out.print(node.getValue() + " ");
 	}
 		
 	/**	Return a balanced version of this binary tree
