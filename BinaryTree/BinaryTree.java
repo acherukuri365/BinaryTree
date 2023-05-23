@@ -27,32 +27,10 @@ public class BinaryTree<E extends Comparable<E>> {
 	 *	@param value		the value to put into the tree
 	 */
 	public void add(E value) {
-		//~ TreeNode<E> node = new TreeNode<E>(root.getValue(), root.getLeft(), root.getRight());
-		//~ TreeNode<E> node = root;
 		if(root == null) {
-			//~ System.out.println("happy");
 			root = new TreeNode<E>(value);
 			return;
 		}
-		//~ TreeNode<E> node = new TreeNode<E>(root.getValue(), root.getLeft(), root.getRight());
-		//~ System.out.println("happy2");
-		//~ while(node.getLeft() != null || node.getRight() != null) {
-			//~ if(value.compareTo(node.getValue()) < 0) {
-				//~ node = node.getLeft();
-				//~ System.out.println("left");
-			//~ }
-			//~ else {
-				//~ node = node.getRight();
-				//~ System.out.println("right");
-			//~ }
-		//~ }
-		
-		//~ if(value.compareTo(node.getValue()) < 0) {
-			//~ node.setLeft(new TreeNode(value));
-			//~ System.out.println("less than");
-		//~ }
-		//~ else
-			//~ node.setRight(new TreeNode(value));
 			
 		TreeNode<E> node = root;
 		TreeNode<E> child = null;
@@ -87,7 +65,7 @@ public class BinaryTree<E extends Comparable<E>> {
 		printInorder(root);
 	}
 	
-	public void printInorder(TreeNode<E> node) {
+	private void printInorder(TreeNode<E> node) {
 		if(node == null)
 			return;
 		
@@ -108,7 +86,7 @@ public class BinaryTree<E extends Comparable<E>> {
 		printPreorder(root);
 	}
 	
-	public void printPreorder(TreeNode<E> node) {
+	private void printPreorder(TreeNode<E> node) {
 		if(node == null)
 			return;
 		
@@ -126,7 +104,7 @@ public class BinaryTree<E extends Comparable<E>> {
 		printPostorder(root);
 	}
 	
-	public void printPostorder(TreeNode<E> node) {
+	private void printPostorder(TreeNode<E> node) {
 		if(node == null)
 			return;
 		
@@ -142,8 +120,25 @@ public class BinaryTree<E extends Comparable<E>> {
 	 */
 	public BinaryTree<E> makeBalancedTree() {
 		BinaryTree<E> balancedTree = new BinaryTree<E>();
-
+		
+		int min = 0;
+		int max = list.size() - 1;
+		int mid = (max + min) / 2;
+		
+		balance(balancedTree, min, max);
+		
 		return balancedTree;
+	}
+	
+	private void balance(BinaryTree<E> tree, int min, int max) {
+		int mid = (min + max) / 2;
+		tree.add(list.get(mid));
+		
+		if(min >= max)
+			return;
+		
+		balance(tree, min, mid - 1);
+		balance(tree, mid + 1, max);
 	}
 	
 	/**
@@ -161,6 +156,19 @@ public class BinaryTree<E extends Comparable<E>> {
 	 *	@return				TreeNode that connects to parent
 	 */
 	public TreeNode<E> remove(TreeNode<E> node, E value) {
+		if(value.compareTo(node.getValue()) < 0) {
+			if(node.getLeft() != null &&
+				node.getLeft().getValue().compareTo(value) == 0) {
+				
+				if(node.get
+			}
+		}
+		
+		if(node.getValue().compareTo(value) == 0) {
+			
+		}
+		
+		
 		return null;
 	}
 	
