@@ -156,20 +156,38 @@ public class BinaryTree<E extends Comparable<E>> {
 	 *	@return				TreeNode that connects to parent
 	 */
 	public TreeNode<E> remove(TreeNode<E> node, E value) {
-		if(value.compareTo(node.getValue()) < 0) {
-			if(node.getLeft() != null &&
+		TreeNode<E> bottom = node;
+		TreeNode<E> curr = root;
+		
+		while(curr
+		
+		/*
+		if(node.getValue() != null) {
+			if(value.compareTo(node.getValue()) < 0 && node.getLeft() != null &&
 				node.getLeft().getValue().compareTo(value) == 0) {
 				
-				if(node.get
+				TreeNode<E> bottom = node;
+				if(node.getRight() != null)
+					bottom = bottom.getRight();
+				
+				while(node.getLeft() != null) {
+					bottom = bottom.getLeft();
+				}
+				
+				TreeNode<E> left = node.getLeft().getLeft();
+				node.setLeft(node.getLeft().getRight());
+				node.getLeft().setLeft(left);
 			}
-		}
-		
-		if(node.getValue().compareTo(value) == 0) {
-			
-		}
-		
-		
-		return null;
+			else if(value.compareTo(node.getValue()) > 0 && node.getRight() != null &&
+				node.getRight().getValue().compareTo(value) == 0) {
+				
+				TreeNode<E> left = node.getRight().getLeft();
+				node.setRight(node.getRight().getRight());
+				node.getRight().setLeft(left);
+			}
+		}		
+		*/
+		return root;
 	}
 	
 
